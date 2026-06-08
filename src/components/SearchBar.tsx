@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   Keyboard,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -38,7 +39,12 @@ export function SearchBar({ onSearch, loading = false, initialValue = '' }: Sear
     <View style={styles.container}>
       <Text style={styles.label}>Look up a word</Text>
       <View style={[styles.inputWrap, focused && styles.inputWrapFocused]}>
-        <Ionicons name="search" size={20} color={focused ? colors.primary : colors.textMuted} />
+        <Ionicons
+          name="search"
+          size={20}
+          color={focused ? colors.primary : colors.textMuted}
+          style={styles.searchIcon}
+        />
         <TextInput
           style={styles.input}
           value={query}
@@ -48,15 +54,20 @@ export function SearchBar({ onSearch, loading = false, initialValue = '' }: Sear
               setValidationError('');
             }
           }}
-          placeholder="e.g. beautiful, courage, learn..."
+          placeholder="Type a word..."
           placeholderTextColor={colors.textMuted}
           autoCapitalize="none"
           autoCorrect={false}
+          autoComplete="off"
+          spellCheck={false}
+          textContentType="none"
           returnKeyType="search"
           onSubmitEditing={handleSearch}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           editable={!loading}
+          selectionColor={colors.primary}
+          underlineColorAndroid="transparent"
         />
         {query.length > 0 ? (
           <Pressable onPress={() => setQuery('')} hitSlop={8}>
@@ -102,23 +113,47 @@ const styles = StyleSheet.create({
   inputWrap: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.sm,
     borderWidth: 1.5,
     borderColor: colors.border,
     borderRadius: radii.md,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm + 2,
+    paddingVertical: Platform.OS === 'ios' ? spacing.sm + 4 : spacing.sm + 2,
     backgroundColor: colors.background,
+    overflow: 'hidden',
+    width: '100%',
   },
   inputWrapFocused: {
     borderColor: colors.primary,
     backgroundColor: colors.surface,
   },
+  searchIcon: {
+    marginRight: spacing.sm,
+    flexShrink: 0,
+  },
   input: {
     flex: 1,
+    minWidth: 0,
+    flexShrink: 1,
     fontSize: typography.body,
     color: colors.text,
-    paddingVertical: 0,
+    paddingVertical: Platform.OS === 'ios' ? 8 : 0,
+    paddingHorizontal: 0,
+    margin: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    ...Platform.select({
+      web: {
+        outlineStyle: 'none',
+        outlineWidth: 0,
+        boxShadow: 'none',
+      } as object,
+      android: {
+        textAlignVertical: 'center',
+      },
+      ios: {
+        lineHeight: typography.body + 4,
+      },
+    }),
   },
   errorRow: {
     flexDirection: 'row',
