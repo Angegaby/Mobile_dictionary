@@ -1,0 +1,90 @@
+Here is the updated full version incorporating your specific corrections.
+------------------------------
+## INTEGRATED SITUATION## Project Description
+LexiTech Solutions Ltd is a software development company based in Kigali City specializing in building user-centric mobile applications that provide easy access to educational and reference resources.
+LexiTech Solutions Ltd has recently been contracted to develop a "Dictionary Mobile Application" aimed at helping users quickly find word meanings, pronunciations, and usage examples. As part of the mobile application development team, your role is to design and implement a cross-platform mobile application that runs seamlessly on both Android and iOS platforms.
+The Dictionary Mobile App will consume data from the Free Dictionary API available at: https://api.dictionaryapi.dev/api/v2/entries/en
+The application should allow users to:
+
+* Search for English words
+* View definitions, parts of speech, and example sentences
+* Listen to word pronunciations (where available)
+* Access multiple meanings of a word
+* Handle cases where a word is not found gracefully
+
+The app must provide a clean, intuitive, and responsive user interface that follows modern mobile UI/UX standards. It should support efficient data retrieval from the API, display results in a structured and readable format, and ensure smooth navigation across different screens.
+Basic functionalities such as search input handling, API data fetching, error handling, and result rendering must be implemented. The application should work reliably on both Android and iOS devices, offering users a fast and convenient way to explore word meanings anytime and anywhere.
+## Task:
+As a mobile application developer, you are tasked with developing the Dictionary Mobile App as described above, ensuring cross-platform compatibility, proper API integration, and a user-friendly experience.
+------------------------------
+## Activities## Activity 1: Word Search & API Integration
+
+   1. Design a search screen with a text input field and a search button
+   2. Validate user input to ensure the search field is not empty
+   3. Capture the entered word when the user submits the search
+   4. Construct the API request URL dynamically using the entered word
+   5. Send an HTTP GET request to: https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+The application should allow users to:
+   6. Display a loading indicator while the API request is in progress
+   7. Receive and parse the JSON response from the API
+   8. Store the fetched word data temporarily for display and navigation
+
+## Activity 2: Display Word Details
+
+   1. Extract the main word, phonetics, meanings, and definitions from the JSON response
+   2. Display the searched word prominently at the top of the screen
+   3. Show phonetic spelling if available
+   4. Display each part of speech (e.g., noun, verb, adjective)
+   5. List all definitions under their respective parts of speech
+   6. Display example sentences provided by the API
+   7. Ensure the layout supports multiple meanings and long definitions
+   8. Apply consistent styling and spacing for readability
+
+## Activity 3: Audio Pronunciation Feature
+
+   1. Check if an audio pronunciation URL exists in the API response
+   2. Display a pronunciation(speaker) icon next to the word or phonetics
+   3. Load the audio file from the provided URL
+   4. Play the audio when the user taps the pronunciation icon
+   5. Handle cases where no audio pronunciation media is available
+   6. disable or hide the audio button if no pronunciation is provided
+   7. Manage audio playback states(play,pause,stop)
+
+## Activity 4: History Features & Search History
+
+   1. Implement a drawer navigator in the application layout
+   2. Create a search history data structure to store previously searched words
+   3. Add each successfully searched word to the history list
+   4. Display the list of searched words in the drawer menu
+   5. Allow users to tap a word from the drawer
+   6. Trigger a new API request when a history item is selected
+   7. Refresh the word detail screen with the selected word's data
+   8. Prevent duplicate entries in search history
+
+## Activity 5: Error Handling & User Feedback
+
+   1. Detect when the API returns a "word not found" response (e.g., 404)
+   2. Display a clear and user friendly "Word not found" message
+   3. Handle network connectivity issues gracefully
+   4. Show an error message when the API request fails
+   5. Hide loading indicators when an error occurs
+   6. Prevent the app from crashing due to malformed responses
+   7. Allow users to retry the search after an error
+   8. Display empty state messages when no data is available
+
+------------------------------
+## Instructions:
+
+   1. In the first hour, you should read carefully about the problem to be solved and write down appropriate designs including but not limited to the Data flow diagram, architecture of your application, outline appropriate endpoints to be developed and pages that need to be developed
+   2. Android applications should be built using React Native
+   3. Input must be validated where applicable
+   4. Handle errors and validations, in case of any errors or exception users should see relevant message of what wrong
+   5. Interaction with the APIs should be done using axios library
+   6. Testing mobile applications should be done using expo cli package
+
+## Additional information:
+
+* Time Allowed: 5 hours
+* Equipment Provided: Computer and telephone
+
+
